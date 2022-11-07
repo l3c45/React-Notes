@@ -1,77 +1,3 @@
-// import React,{useRef} from 'react'
-// import {Grid,FormControl,Input,Button,Menu,MenuItem,Select,InputLabel } from '@mui/material'
-// import { priority } from '../../../models/levels'
-// import { task } from '../../../models/task_model'
-
-
-
-// const TaskForm = ({add}) => {
-//     const name=useRef("")
-//     const description=useRef("")
-//     const taskPriority=useRef(priority.low)
-
-//     const getData = (e) => {
-//       e.preventDefault()
-
-//       const newTask= new task(
-//        name.current.children[0].value,
-//         description.current.children[0].value,
-//        taskPriority.current.children[1].value,
-//         false
-      
-//       )
-      
-        
-//         add(newTask)
-//     }
-    
-//   return (
-//     <Grid
-//   container
-//   spacing={0}
-//   direction="column"
-//   alignItems="center"
-//   justifyContent={"center"}
-//   style={{ height: '100vh' }}
-// >
-
-//   <form className="form" onSubmit={getData}>
-//   <FormControl sx={{width:1/2}}>
-  
-//   <InputLabel htmlFor="name">Task Name</InputLabel>
-//     <Input sx={{my:3}} ref={name} id="name" aria-describedby="my-helper-text" placeholder='Name' />
-//     <InputLabel sx={{mt:9}}htmlFor="description" >Task description</InputLabel>
-//     <Input sx={{my:3}} id="description" ref={description} aria-describedby="my-text" placeholder="Description" />
-
-//     <InputLabel sx={{mt:20}}id="priority-label">Priority</InputLabel>
-//   <Select sx={{my:2}}
-//     labelId="priority-label"
-//     id="priority-select"
-//     ref={taskPriority}
-//     label="Priority"
-   
-//   >
-//     <MenuItem value={priority.low}>Low</MenuItem>
-//     <MenuItem value={priority.medium}>Medium</MenuItem>
-//     <MenuItem value={priority.high}>High</MenuItem>
-//     <MenuItem value={priority.critical}>Critical</MenuItem>
-//   </Select>
-//     <Button  type="submit"   variant="contained">Add Note</Button>
-//   </FormControl>
-   
-// </form>
-// </Grid> 
-
-
-
-  
-//   )
-// }
-
-// export default TaskForm
-
-
-
 import React,{useRef} from 'react'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -79,6 +5,11 @@ import {Button,TextField,Grid} from '@mui/material'
 import {FormControl,Input,Menu,MenuItem,Select,InputLabel } from '@mui/material'
 import { priority } from '../../../models/levels'
  import { task } from '../../../models/task_model'
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
     const validationSchema = yup.object({
         name: yup
@@ -96,6 +27,16 @@ import { priority } from '../../../models/levels'
       const TaskForm
       = ({add}) => {
 
+        const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
 
 
@@ -105,7 +46,7 @@ import { priority } from '../../../models/levels'
 
     const getData = () => {
 
-      
+      handleClose()
       const newTask= new task(
        nameTask.current.children[1].children[0].value,
         descriptionTask.current.children[1].children[0].value,
@@ -129,17 +70,26 @@ import { priority } from '../../../models/levels'
         })
       
         return (
+<div>
+      <Button variant="outlined" onClick={handleClickOpen}>
+       Create New Note
+      </Button>
 
-            <Grid 
-             container
+      <Dialog open={open} onClose={handleClose}>
+  
+        <DialogContent sx={{px:2,py:0,height:420,overflowY:'hidden'}}>
+          
+
+          <Grid 
+             
         
         alignItems="center"
         justifyContent="center"
-        style={{ minHeight: '100vh' }}
+        style={{ minHeight: '500px' }}
             
             >
 
-<Grid className='form-login'  item xs={8}>
+<Grid   item xs={12}>
 
 
             <form  onSubmit={(e)=>formik.handleSubmit(e)}>
@@ -214,6 +164,19 @@ import { priority } from '../../../models/levels'
   </Grid>
   
 </Grid>
+            
+
+
+        </DialogContent>
+        
+      </Dialog>
+    </div>
+
+
+
+
+
+            
           
         );
     }
@@ -221,7 +184,6 @@ import { priority } from '../../../models/levels'
 
 
 export default TaskForm
-
 
 
 
