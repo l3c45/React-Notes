@@ -14,13 +14,21 @@ import {Button,TextField,Grid} from '@mui/material'
           .string('Enter your password')
           .min(8, 'Password should be of minimum 8 characters length')
           .required('Password is required'),
+        verification: yup
+          .string('Re Enter your password')
+          .oneOf([yup.ref('password'), null], 'Passwords must match')
+          .required('Password is required')
+
+          
       });
       
-      const LoginForm = () => {
+      const RegisterForm
+      = () => {
         const formik = useFormik({
           initialValues: {
-            email: 'foobar@example.com',
-            password: 'foobar',
+            email: "",
+            password: "",
+            verification:""
           },
           validationSchema: validationSchema,
           onSubmit: (values) => {
@@ -43,7 +51,7 @@ import {Button,TextField,Grid} from '@mui/material'
 
 
             <form  onSubmit={formik.handleSubmit}>
-            <h2>Login</h2>
+            <h2>Register</h2>
               <TextField
               sx={{my:1}}
                 fullWidth
@@ -67,6 +75,18 @@ import {Button,TextField,Grid} from '@mui/material'
                 error={formik.touched.password && Boolean(formik.errors.password)}
                 helperText={formik.touched.password && formik.errors.password}
               />
+              <TextField
+              sx={{my:1}}
+                fullWidth
+                id="verification"
+                name="verification"
+                label="Re enter Password"
+                type="password"
+                value={formik.values.verification}
+                onChange={formik.handleChange}
+                error={formik.touched.verification && Boolean(formik.errors.verification)}
+                helperText={formik.touched.verification && formik.errors.verification}
+              />
               <Button sx={{':hover': {
       bgcolor: "#FFC60B",
       color: 'white',
@@ -84,7 +104,7 @@ import {Button,TextField,Grid} from '@mui/material'
 
 
 
-export default LoginForm
+export default RegisterForm
 
 
 

@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import Task from '../pure/Task';
 import {task} from '../../models/task_model';
 import {priority} from '../../models/levels';
+import TaskForm from '../pure/forms/TaskForm';
 
 
 
@@ -33,6 +34,13 @@ const task6=new task("6TEST","TASK FOR TESTING",priority.medium)
   
       }
 
+      const addTask = (task) => {
+  const temp =[...tasks]
+ temp.push(task)
+ setTasks(temp)
+  
+      }
+
   return (
     <Container >
      <Grid container spacing={2}>
@@ -48,7 +56,10 @@ const task6=new task("6TEST","TASK FOR TESTING",priority.medium)
 
      
      </Grid>
+
+     <TaskForm add={addTask}></TaskForm>
     </Container>
+   
     
   )
 }

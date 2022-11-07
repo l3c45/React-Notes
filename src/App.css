@@ -1,3 +1,7 @@
+form {
+  width: 100%;
+  text-align: center;
+}
 .card {
 text-align: center;
 }
@@ -37,4 +41,19 @@ position:relative;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+body{
+background-color: #444444;
+}
+
+.form-login {
+  border:1px solid black;
+  padding: 30px;
+  background-color: #FEFFDB;
+}
+
+.form-login form h2 {
+  font-size: 3rem;
 }
