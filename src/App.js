@@ -1,13 +1,18 @@
+
+import { Container } from '@mui/material';
+import TaskList from './Components/container/TaskList';
+import TaskForm from './Components/pure/forms/TaskForm';
 import './App.css';
-import Contact from "./Components/Contact.jsx"
 
 function App() {
   return (
-    <div className="App">
+    <Container >
     
-        <Contact> </Contact>
-      
-    </div>
+    
+   {/* <TaskList></TaskList> */}
+   <TaskForm></TaskForm>
+
+    </Container>
   );
 }
 
