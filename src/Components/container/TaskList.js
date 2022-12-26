@@ -1,4 +1,4 @@
-import React ,{useState}from 'react'
+import React ,{useState,useEffect}from 'react'
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Task from '../pure/Task';
@@ -10,14 +10,15 @@ import TaskForm from '../pure/forms/TaskForm';
 
 function TaskList() {
 
-    const task1=new task("1TEST","TASK FOR TESTING",priority.low)
-const task2=new task("2TEST2","MORE DATAdfdfdfdfdfdfdfdfdfdfdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffaaaaaaaaa",priority.low)
-const task3=new task("3TEST","TASK FOR TESTING",priority.critical)
-const task4=new task("4TEST","TASK FOR TESTING",priority.high)
-const task5=new task("5TEST2","MORE DATAdfdfdfdfdfdfdfdfdfdfdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffaaaaaaaaa",priority.low)
-const task6=new task("6TEST","TASK FOR TESTING",priority.medium)
+const task1=new task("Mañana","Ir al Super",priority.low)
+const taskSaved = JSON.parse(localStorage.getItem('tasks'));
 
-    const [tasks, setTasks] = useState([task1,task2,task3,task4,task5,task6])
+    const [tasks, setTasks] = useState(taskSaved || [task1])
+
+    useEffect(() => {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }, [tasks]);
+    
 
     const removeTask = (taskToRemove) => {
       const temp=[...tasks]
@@ -42,9 +43,14 @@ const task6=new task("6TEST","TASK FOR TESTING",priority.medium)
       }
 
   return (
-    <Container >
+    <Container sx={{mt:10}} >
      <Grid container spacing={2}>
-     {tasks.map((task,index) => {
+     {tasks.length===0? 
+   
+      <h3 className='empty-title'> No hay tareas</h3>
+    
+    :
+     tasks.map((task,index) => {
         return (
             <Grid key={index} item xs={12} md={6} lg={4}>
       <Task data={task} removeTask={removeTask} toggle={toggleTask}></Task>

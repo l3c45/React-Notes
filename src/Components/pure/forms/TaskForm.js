@@ -67,8 +67,8 @@ const TaskForm = ({ add }) => {
 
   return (
     <div>
-      <Box onClick={handleClickOpen} sx={{ "& > :not(style)": { m: 1 } }}>
-        <Fab color="primary" aria-label="add">
+      <Box onClick={handleClickOpen} sx={{ "& > :not(style)": { m: 1 },position:"absolute" ,bottom:10}}>
+        <Fab sx={{backgroundColor:"#FF8B00"}} aria-label="add">
           <AddIcon />
         </Fab>
       </Box>

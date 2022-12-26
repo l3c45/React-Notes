@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useRef} from "react";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Button, TextField, Grid } from "@mui/material";
@@ -15,6 +16,11 @@ const validationSchema = yup.object({
 });
 
 const LoginForm = () => {
+  const userEmail=useRef("")
+  const userPass=useRef("")
+const navigate=useNavigate()
+
+  
   const formik = useFormik({
     initialValues: {
       email: "foobar@example.com",
@@ -22,7 +28,8 @@ const LoginForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      alert(JSON.stringify(values, null, 2))
+      navigate("/home");
     },
   });
 
@@ -31,9 +38,9 @@ const LoginForm = () => {
       container
       alignItems="center"
       justifyContent="center"
-      style={{ minHeight: "100vh" }}
+      style={{ minHeight: "80vh" }}
     >
-      <Grid className="form-login" item xs={8}>
+      <Grid className="form-login" item xs={6}>
         <form onSubmit={formik.handleSubmit}>
           <h2>Login</h2>
           <TextField
@@ -73,7 +80,9 @@ const LoginForm = () => {
           >
             Submit
           </Button>
+          
         </form>
+        
       </Grid>
     </Grid>
   );

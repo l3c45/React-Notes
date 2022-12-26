@@ -2,6 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Button, TextField, Grid } from "@mui/material";
+import { User } from "../../../models/user_model";
 
 const validationSchema = yup.object({
   email: yup
@@ -19,6 +20,16 @@ const validationSchema = yup.object({
 });
 
 const RegisterForm = () => {
+
+  const saveUser= (user) => {
+
+    const newUser= new User(user.email,user.password)
+
+   
+    localStorage.setItem('perfil', JSON.stringify(newUser))
+
+  }
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -27,7 +38,7 @@ const RegisterForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      saveUser(values)
     },
   });
 
@@ -36,7 +47,7 @@ const RegisterForm = () => {
       container
       alignItems="center"
       justifyContent="center"
-      style={{ minHeight: "100vh" }}
+      style={{ minHeight: "80vh" }}
     >
       <Grid className="form-login" item xs={8}>
         <form onSubmit={formik.handleSubmit}>
@@ -47,6 +58,7 @@ const RegisterForm = () => {
             id="email"
             name="email"
             label="Email"
+           
             value={formik.values.email}
             onChange={formik.handleChange}
             error={formik.touched.email && Boolean(formik.errors.email)}
@@ -59,6 +71,7 @@ const RegisterForm = () => {
             name="password"
             label="Password"
             type="password"
+           
             value={formik.values.password}
             onChange={formik.handleChange}
             error={formik.touched.password && Boolean(formik.errors.password)}

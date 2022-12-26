@@ -57,3 +57,11 @@ background-color: #444444;
 .form-login form h2 {
   font-size: 3rem;
 }
+
+
+ .empty-title {
+  width: 100%;
+  text-align: center;
+  color:#fff;
+  font-size: 2rem;
+ }

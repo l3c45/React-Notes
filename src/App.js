@@ -2,17 +2,37 @@ import { Container } from "@mui/material";
 import TaskList from "./Components/container/TaskList";
 import "./App.css";
 import ResponsiveAppBar from "./Components/container/nav";
-import LoginForm from "./Components/pure/forms/LoginForm";
-import RegisterForm from "./Components/pure/forms/RegisterForm";
+import {BrowserRouter  , Route , Navigate, Routes} from "react-router-dom"
+import { NotFound } from "./pages/404/NotFound";
+import { Login } from "./pages/Login/Login";
+import { Register } from "./pages/Register/register";
+import { HomePage } from "./pages/home/homePage";
 
 function App() {
+
+  const logged=true
+
   return (
-    <Container>
-      <ResponsiveAppBar></ResponsiveAppBar>
-      <TaskList></TaskList>
-      {/* <LoginForm></LoginForm> */}
-      {/* <RegisterForm></RegisterForm> */}
-    </Container>
+  
+
+    <BrowserRouter>
+      <Routes>
+      <Route exact path="/" element={<HomePage/>} />
+        <Route exact path="/" element={<Login/>} />
+        <Route exact path="/register" element={<Register/>} />
+        <Route exact path="/home" element=
+        {
+          logged ?
+          (<HomePage/>)
+          :
+          (<Navigate to="/" replace />  )
+        }
+        />
+         
+        <Route path="*" element={<NotFound/>} />
+      </Routes>
+
+    </BrowserRouter>
   );
 }
 
