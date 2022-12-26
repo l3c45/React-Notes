@@ -54,7 +54,7 @@ const RegisterForm = () => {
       justifyContent="center"
       style={{ minHeight: "80vh" }}
     >
-      <Grid className="form-login" item xs={8}>
+      <Grid className="form-login" item xs={12} lg={6}>
         <form onSubmit={formik.handleSubmit}>
           <h2>Register</h2>
           <TextField

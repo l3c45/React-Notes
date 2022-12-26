@@ -44,7 +44,7 @@ if(saved.email===values.email && saved.password===values.password){
       justifyContent="center"
       style={{ minHeight: "80vh" }}
     >
-      <Grid className="form-login" item xs={6}>
+      <Grid className="form-login" item xs={12} lg={6}>
         <form onSubmit={formik.handleSubmit}>
           <h2>Login</h2>
           <TextField
