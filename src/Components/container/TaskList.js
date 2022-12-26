@@ -11,6 +11,7 @@ import TaskForm from '../pure/forms/TaskForm';
 function TaskList() {
 
 const task1=new task("Mañana","Ir al Super",priority.low)
+
 const taskSaved = JSON.parse(localStorage.getItem('tasks'));
 
     const [tasks, setTasks] = useState(taskSaved || [task1])

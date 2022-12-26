@@ -19,7 +19,7 @@ const LoginForm = () => {
   // const userEmail=useRef("")
   // const userPass=useRef("")
 const navigate=useNavigate()
-
+const localStorage = window.localStorage;
   
   const formik = useFormik({
     initialValues: {
@@ -28,8 +28,12 @@ const navigate=useNavigate()
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
-      navigate("/home");
+  const saved=JSON.parse(localStorage.getItem("perfil"))
+if(saved.email===values.email && saved.password===values.password){
+  navigate("/home");
+}else{
+  alert("CREDENCIALES INVALIDAS")
+}
     },
   });
 
