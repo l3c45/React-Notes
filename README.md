@@ -1,4 +1,4 @@
-# Note App
+# TASKS App
 
 Aplicacion de Tareas construida con ReactJs , MaterialUI
 
